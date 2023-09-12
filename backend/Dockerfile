@@ -1,0 +1,49 @@
+# syntax=docker/dockerfile:1
+
+FROM node:lts-alpine as development
+
+WORKDIR /app
+
+COPY --chown=node:node package*.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+USER node
+
+FROM node:lts-alpine as build
+
+WORKDIR /app
+
+COPY --chown=node:node package*.json ./
+
+COPY --chown=node:node --from=development /app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
+RUN npm run generate
+
+ENV NODE_ENV production
+
+RUN npm run build
+
+RUN npm ci --omit=dev
+
+USER node
+
+FROM node:lts-alpine as production
+
+EXPOSE 4000
+
+COPY --chown=node:node --from=build /app/node_modules ./node_modules
+COPY --chown=node:node --from=build /app/dist ./dist
+COPY --chown=node:node --from=build /app/package*.json ./
+COPY --chown=node:node --from=build /app/prisma ./prisma
+COPY --chown=node:node --from=build /app/.firebase ./.firebase
+
+RUN npx prisma generate
+
+ENV HOST=127.0.0.1
+
+CMD ["npm", "run", "docker:prod"]

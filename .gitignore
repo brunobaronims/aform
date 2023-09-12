@@ -1,0 +1,8 @@
+# Environment
+.env
+
+# SSH
+*.pem
+
+# Firebase private key
+.firebase

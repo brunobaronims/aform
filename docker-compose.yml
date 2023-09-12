@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    restart: always
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  api:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production
+    container_name: api
+    ports:
+      - 4001:4000
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      API_PORT: ${API_PORT}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    ports:
+      - 3001:3000
+    depends_on:
+      - api
+
+  nginx:
+    restart: always
+    build:
+      context: ./client/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - client
+      - api
+    environment:
+      - API_URL=${API_URL}
+      - CLIENT_URL=${CLIENT_URL}
+
+volumes:
+  postgres:

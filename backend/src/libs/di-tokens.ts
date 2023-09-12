@@ -1,0 +1,1 @@
+export const PRISMA_ERROR_HANDLER = Symbol('PRISMA_ERROR_HANDLER');
