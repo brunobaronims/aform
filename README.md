@@ -36,7 +36,6 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
   ### Backend
   - `npm i` to install dependencies
   - Start local database server
-  - Start `redis` server
   - Configure environment variables in `.env` according to example
   - `npm run migration:dev` to run migrations on database and generate the Prisma Client
   - `npm run start:debug` to launch backend server in debug mode
@@ -48,7 +47,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
   - `npm run dev` to start frontend server
 
 ## Container
-- Configure environment variables in `.env` according to example
+- Configure environment variables in root and client `.env` files according to example
 - `docker-compose up -d` from project root to build images and the container network
 
 # To-do
@@ -59,8 +58,10 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 - [X] ~~Login page functionalities and design~~
 - [X] ~~Fix frontend Docker container~~
 - [ ] Update documentation for backend and frontend
-- [ ] Implement backend post flow
+- [X] ~~Implement backend post flow~~
 - [ ] Implement frontend post flow
+- [ ] Add frontend test suite
+- [ ] Add backend test suite
 - [ ] Configure CI/CD
 
 
