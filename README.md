@@ -59,7 +59,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 - [X] ~~Login page functionalities and design~~
 - [X] ~~Fix frontend Docker container~~
 - [ ] Update documentation for backend and frontend
-- [ ] Implement backend post flow
+- [X] ~~Implement backend post flow~~
 - [ ] Implement frontend post flow
 - [ ] Add frontend test suite
 - [ ] Add backend test suite
