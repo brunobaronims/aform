@@ -16,4 +16,5 @@ export interface UserData {
   email: string | null;
   handle: string | null;
   metadata: UserMetadata;
+  id: string;
 }

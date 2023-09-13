@@ -16,7 +16,8 @@ export default function AuthProvider() {
         const userData: UserData = {
           email: user.email,
           handle: user.displayName,
-          metadata: user.metadata
+          metadata: user.metadata,
+          id: user.uid
         };
 
         state.signIn(userData);
