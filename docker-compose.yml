@@ -19,7 +19,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      target: production
+      target: ${API_BUILD_TARGET}
     container_name: api
     ports:
       - 4001:4000
