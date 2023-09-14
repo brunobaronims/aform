@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import { app } from '@/providers/Firebase';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 
+import PostModal from '@/components/postModal';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+
 async function firebaseSignOut(router: AppRouterInstance) {
   const auth = getAuth(app);
 
@@ -18,15 +22,20 @@ async function firebaseSignOut(router: AppRouterInstance) {
 
 export default function Home() {
   const router = useRouter();
+  const [postModalOpen, setPostModalOpen] = useState(false);
 
   return (
     <div className='flex flex-row'>
+      {postModalOpen && createPortal(<PostModal handleClick={() => setPostModalOpen(false)}/>, document.body)}
       <section className='h-screen w-1/3'>
         <ul className='flex h-full flex-col items-center justify-center'>
           <button className='mb-8 w-fit font-secondary text-lg font-normal text-violet transition-colors hover:text-white'>
             HOME
           </button>
-          <button className='mb-8 w-fit font-secondary text-lg font-normal text-violet transition-colors hover:text-white'>
+          <button
+            className='mb-8 w-fit font-secondary text-lg font-normal text-violet transition-colors hover:text-white'
+            onClick={() => setPostModalOpen(true)}
+          >
             NEW
           </button>
           <button className='mb-8 w-fit font-secondary text-lg font-normal text-violet transition-colors hover:text-white'>
@@ -41,7 +50,7 @@ export default function Home() {
           >
             SIGN OUT
           </button>
-          <hr className='border-violet border-1 w-36'></hr>
+          <hr className='border-1 w-36 border-violet'></hr>
         </ul>
       </section>
       <section className='h-screen w-1/3'></section>
