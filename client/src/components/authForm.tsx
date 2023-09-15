@@ -52,7 +52,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className='mt-12 h-full w-96'>
+    <div className='w-[16rem] sm:w-96'>
       {activeForm === 'login' ? (
         <LoginForm setActiveForm={setActiveForm} onSubmit={loginSubmit} />
       ) : (

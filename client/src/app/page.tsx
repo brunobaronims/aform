@@ -2,31 +2,31 @@ import AuthForm from '../components/authForm';
 
 export default function Auth() {
   return (
-    <main className='flex min-h-screen flex-col items-center'>
-      <div className='relative bg-black w-full h-44 mt-20 overflow-hidden'>
-        <h1 className='bottom-32 inset-x-0 animate-slide absolute text-violet font-secondary font-extralight text-8xl'>
-          WELCOME BACK
-        </h1>
-        <h1 className='bottom-24 inset-x-0 animate-slide-slow absolute text-violet font-secondary font-extralight text-8xl'>
-          WELCOME BACK
-        </h1>
-        <h1 className='inset-x-0 animate-slide-xxslow absolute text-violet font-secondary font-extralight text-8xl mt-32'>
-          WELCOME BACK
-        </h1>
-        <h1 className='inset-x-0 animate-slide-xxfast absolute text-violet font-secondary font-extralight text-8xl mt-15'>
-          WELCOME BACK
-        </h1>
-        <h1 className='inset-x-0 animate-slide-xfast absolute text-violet font-secondary font-extralight text-8xl mt-44'>
-          WELCOME BACK
-        </h1>
-        <h1 className='inset-x-0 animate-slide-fast absolute text-violet font-secondary font-extralight text-8xl mt-24'>
-          WELCOME BACK
-        </h1>
-        <h1 className='inset-x-0 animate-slide-xslow absolute text-violet font-secondary font-light text-8xl mt-10'>
-          WELCOME BACK
-        </h1>
-      </div>
-      <AuthForm />
+    <main className='relative flex min-h-screen justify-center overflow-hidden md:block'>
+      <h1 className='absolute inset-x-0 bottom-44 z-0 w-max animate-slide font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 bottom-24 z-0 w-max animate-slide-slow font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 z-0 mt-56 w-max animate-slide-xxslow font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 z-0 mt-4 w-max animate-slide-xxfast font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 z-0 mt-24 w-max animate-slide-xfast font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 z-0 mt-40 w-max animate-slide-fast font-secondary text-8xl font-extralight text-violet'>
+        WELCOME BACK
+      </h1>
+      <h1 className='absolute inset-x-0 z-0 mt-[19rem] w-max animate-slide-xslow font-secondary text-[8rem] font-light text-violet'>
+        WELCOME BACK
+      </h1>
+      <section className='absolute top-[calc((100vh-35rem)/2)] z-50 mt-0 flex h-[35rem] w-[20rem] items-center justify-center bg-purple/90 md:bg-purple sm:top-[calc((100vh-40rem)/2)] sm:h-[40rem] sm:w-[30rem] md:right-0 md:top-0 md:h-screen'>
+        <AuthForm />
+      </section>
     </main>
   );
 }

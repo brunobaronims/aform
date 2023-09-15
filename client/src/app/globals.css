@@ -22,7 +22,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: theme('colors.purple');
+  background-color: theme('colors.black');
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -57,7 +57,7 @@ export default function RegisterForm({
           disabled: isSubmitting
         })}
         placeholder='email'
-        className='mx-0 mt-0 h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
+        className='mx-0 mt-0 h-12 sm:h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
       />
       {errors.email?.message && (
         <span className='mt-2 font-primary text-violet'>
@@ -70,7 +70,7 @@ export default function RegisterForm({
           disabled: isSubmitting
         })}
         placeholder='handle'
-        className='mx-0 mt-10 h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
+        className='mx-0 mt-10 h-12 sm:h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
       />
       {errors.handle?.message && (
         <span className='mt-2 font-primary text-violet'>
@@ -84,7 +84,7 @@ export default function RegisterForm({
         })}
         type='password'
         placeholder='password'
-        className='mx-0 mt-10 h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
+        className='mx-0 mt-10 h-12 sm:h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
       />
       {errors.password?.message && (
         <span className='mt-2 font-primary text-violet'>
@@ -98,7 +98,7 @@ export default function RegisterForm({
         })}
         type='password'
         placeholder='confirm password'
-        className='mx-0 mt-10 h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
+        className='mx-0 mt-10 h-12 sm:h-16 w-full border-2 border-black bg-black px-6 py-4 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
       />
       {errors.confirm?.message && (
         <span className='mt-2 font-primary text-violet'>
@@ -108,13 +108,13 @@ export default function RegisterForm({
       <button
         type='submit'
         disabled={isSubmitting}
-        className='mt-10 h-16 w-36 border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none disabled:animate-spin disabled:bg-slate-300'
+        className='mt-10 h-14 sm:h-16 w-36 border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none disabled:animate-spin disabled:bg-slate-300'
       >
         REGISTER
       </button>
       <div
         onClick={() => setActiveForm('login')}
-        className='mx-0 mb-10 mt-6 flex h-16 w-36 cursor-pointer items-center justify-center border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none'
+        className='mx-0 mt-6 flex h-14 sm:h-16 w-36 cursor-pointer items-center justify-center border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none'
       >
         LOGIN
       </div>

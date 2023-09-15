@@ -2,12 +2,12 @@
 
 import { getAuth, signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { app } from '@/providers/Firebase';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
-
-import PostModal from '@/components/postModal';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import { app } from '@/providers/Firebase';
+import PostModal from '@/components/postModal';
 
 async function firebaseSignOut(router: AppRouterInstance) {
   const auth = getAuth(app);
