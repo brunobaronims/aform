@@ -1,9 +1,9 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { LoginParams } from '@/interfaces/auth.interfaces';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 const loginSchema = z.object({
   email: z

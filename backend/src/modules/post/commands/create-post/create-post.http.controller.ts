@@ -1,4 +1,11 @@
-import { Body, Controller, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CommandBus } from '@nestjs/cqrs';
 
@@ -6,14 +13,17 @@ import { CreatePostCommand } from './create-post.command';
 import { CreatePostRequestDto } from './create-post.request.dto';
 import BadRequestError from '@/libs/api/errors/bad-request.error';
 import InternalServerError from '@/libs/api/errors/internal-server.error';
+import { AuthGuard } from '@/libs/guards/auth.guard';
+import { AuthenticatedRequest } from '@/libs/interfaces/authenticated-request';
 
 @ApiTags('post')
 @Controller()
 export class CreatePostHttpController {
   constructor(private readonly commandBus: CommandBus) {}
 
+  @UseGuards(AuthGuard)
   @Post('/post')
-  @ApiOperation({summary: 'Create a post'})
+  @ApiOperation({ summary: 'Create a post' })
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Post created'
@@ -28,8 +38,15 @@ export class CreatePostHttpController {
     description: 'Something went wrong!',
     type: InternalServerError
   })
-  async create(@Body() body: CreatePostRequestDto):Promise<string> {
-    const command = new CreatePostCommand(body);
+  async create(
+    @Body() body: CreatePostRequestDto,
+    @Request() req: AuthenticatedRequest
+  ): Promise<string> {
+    const command = new CreatePostCommand({
+      description: body.description,
+      handle: req.user.handle,
+      userId: req.user.id
+    });
 
     const result: string = await this.commandBus.execute(command);
 

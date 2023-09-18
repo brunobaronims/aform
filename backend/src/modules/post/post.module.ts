@@ -11,6 +11,8 @@ import { CreatePostHttpController } from './commands/create-post/create-post.htt
 import { CreatePostService } from './commands/create-post/create-post.service';
 import { GetPostsHttpController } from './queries/get-posts/get-posts.http.controller';
 import { GetPostsQueryHandler } from './queries/get-posts/get-posts.query-handler';
+import { USER_REPOSITORY } from '../user/user.di-tokens';
+import { UserRepository } from '../user/database/user.repository';
 
 const httpControllers = [CreatePostHttpController, GetPostsHttpController];
 
@@ -25,7 +27,8 @@ const queryHandlers: Provider[] = [GetPostsQueryHandler];
 const mappers: Provider[] = [PostMapper];
 
 const repositories: Provider[] = [
-  { provide: POST_REPOSITORY, useClass: PostRepository }
+  { provide: POST_REPOSITORY, useClass: PostRepository },
+  { provide: USER_REPOSITORY, useClass: UserRepository }
 ];
 
 @Module({

@@ -33,7 +33,8 @@ module.exports = {
         'slide-slow': 'slide 51s linear infinite reverse',
         'slide-xslow': 'slide 54s linear infinite',
         'slide-xxslow': 'slide 57s linear infinite',
-        fadein: 'fadein .5s ease-in-out'
+        fadein: 'fadein .3s ease-in-out',
+        fadeout: 'fadeout .3s ease-in-out'
       },
       keyframes: {
         slide: {
@@ -44,6 +45,10 @@ module.exports = {
         fadein: {
           from: { opacity: 0 },
           to: { opacity: 1 }
+        },
+        fadeout: {
+          from: { opacity: 1 },
+          to: { opacity: 0 }
         }
       }
     }

@@ -17,4 +17,5 @@ export interface UserData {
   handle: string | null;
   metadata: UserMetadata;
   id: string;
+  token: string;
 }

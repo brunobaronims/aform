@@ -1,18 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
-import LoginForm from './loginForm';
-import RegisterForm from './registerForm';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 import { LoginParams, RegisterParams } from '@/interfaces/auth.interfaces';
 import authApi from '@/services/authApi';
+import { useGlobalStateStore } from '@/providers/GlobalState';
 
 export default function AuthForm() {
   const [activeForm, setActiveForm] = useState('login');
+  const state = useGlobalStateStore((state) => state);
   const router = useRouter();
+
+  useEffect(() => {
+    if (state.checkingUser) return;
+
+    if (state.user) router.push('/home');
+  });
 
   const registerMutation = useMutation({
     mutationFn: async (userData: RegisterParams) => {
@@ -40,7 +48,7 @@ export default function AuthForm() {
       return data;
     },
     onSuccess() {
-      router.push('/home');
+      return;
     },
     onError(e: Error) {
       toast.error(e.message);
@@ -48,8 +56,15 @@ export default function AuthForm() {
   });
 
   const loginSubmit = (formData: LoginParams) => {
-    loginMutation.mutate({ ...formData, email: formData.email.toLocaleLowerCase() });
+    loginMutation.mutate({
+      ...formData,
+      email: formData.email.toLocaleLowerCase()
+    });
   };
+
+  if (state.checkingUser) return null;
+
+  if (state.user) return null;
 
   return (
     <div className='w-[16rem] sm:w-96'>

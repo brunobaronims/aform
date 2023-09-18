@@ -1,6 +1,7 @@
-import AuthForm from '../components/authForm';
+import AuthForm from '../components/Auth/AuthForm';
 
 export default function Auth() {
+
   return (
     <main className='relative flex min-h-screen justify-center overflow-hidden md:block'>
       <h1 className='absolute inset-x-0 bottom-44 z-0 w-max animate-slide font-secondary text-8xl font-extralight text-violet'>
