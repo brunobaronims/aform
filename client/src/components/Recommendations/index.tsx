@@ -10,7 +10,12 @@ export default function Recommendations() {
         <span className='mb-3 font-secondary text-lg text-dark-violet'>
           You should listen to Yves Tumor
         </span>
-        <Image src={YvesTumor} className='h-auto w-full' alt='Album cover' />
+        <Image
+          src={YvesTumor}
+          priority={true}
+          className='h-auto w-full'
+          alt='Album cover'
+        />
       </div>
       <div className='mt-12 flex flex-col items-center sm:h-max sm:w-72 '>
         <span className='mb-3 font-secondary text-lg text-dark-violet'>

@@ -38,5 +38,10 @@ export default function CreatePostForm() {
     createPostMutation.mutate(postData);
   };
 
-  return <CreatePostFormUI onSubmit={onSubmit} />;
+  return (
+    <CreatePostFormUI
+      isLoading={createPostMutation.isLoading}
+      onSubmit={onSubmit}
+    />
+  );
 }
