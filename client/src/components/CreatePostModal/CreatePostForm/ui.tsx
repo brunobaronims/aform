@@ -8,7 +8,7 @@ import { PostDescription } from '@/interfaces/post.interfaces';
 import LoadingIndicator from '@/components/LoadingIndicator';
 
 const postSchema = z.object({
-  description: z.string().min(1).max(200, 'No more than 200 characters').trim()
+  description: z.string().min(1, 'Nothing to say?').max(200, 'No more than 200 characters').trim()
 });
 
 export default function CreatePostFormUI({
