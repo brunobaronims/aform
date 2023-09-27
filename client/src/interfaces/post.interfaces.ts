@@ -6,3 +6,8 @@ export interface PostParams extends PostDescription {
 export interface PostDescription {
   description: string;
 }
+
+export interface PostResponse extends PostDescription {
+  handle: string;
+  createdAt: Date;
+}

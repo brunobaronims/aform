@@ -10,6 +10,6 @@ export class CreatePostRequestDto {
     description: 'Post content'
   })
   @MaxLength(100)
-  @MinLength(5)
+  @MinLength(1)
   readonly description!: string;
 }

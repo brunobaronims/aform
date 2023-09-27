@@ -1,11 +1,7 @@
 export default function HomeLayout({
-    children
+  children
 }: {
-    children: React.ReactNode
+  children: React.ReactNode;
 }) {
-    return (
-        <main className="bg-black h-screen">
-            {children}
-        </main>
-    )
-};
+  return <main className='bg-black h-screen'>{children}</main>;
+}

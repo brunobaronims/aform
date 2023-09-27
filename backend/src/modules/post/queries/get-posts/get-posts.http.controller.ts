@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Query, Request, UseGuards } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -8,12 +8,16 @@ import { PostPaginatedQueryRequestDto } from '../../dtos/post.paginated-query.re
 import { PaginatedResponse } from '@/libs/interfaces/response';
 import { PostResponseDto } from '../../dtos/post.response.dto';
 import InternalServerError from '@/libs/api/errors/internal-server.error';
+import { AuthGuard } from '@/libs/guards/auth.guard';
+import UnauthorizedError from '@/libs/api/errors/unauthorized.error';
+import { AuthenticatedRequest } from '@/libs/interfaces/authenticated-request';
 
 @ApiTags('post')
 @Controller()
 export class GetPostsHttpController {
   constructor(private readonly queryBus: QueryBus) {}
 
+  @UseGuards(AuthGuard)
   @Get('/post')
   @ApiOperation({ summary: 'Get posts' })
   @ApiResponse({
@@ -26,13 +30,19 @@ export class GetPostsHttpController {
     description: 'Internal server error',
     type: InternalServerError
   })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Unauthorized user',
+    type: UnauthorizedError
+  })
   async getUsers(
-    @Query() queryParams: PostPaginatedQueryRequestDto
+    @Query() queryParams: PostPaginatedQueryRequestDto,
+    @Request() req: AuthenticatedRequest
   ): Promise<PostPaginatedResponseDto> {
     const query = new GetPostsQuery({
       where: {
         handle: {
-          contains: queryParams?.handle
+          contains: req.user.handle
         },
         description: {
           contains: queryParams?.description

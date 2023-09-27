@@ -1,7 +1,6 @@
 import {
   Controller,
   Post,
-  UseGuards,
   HttpStatus,
   Body
 } from '@nestjs/common';

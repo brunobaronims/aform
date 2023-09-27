@@ -26,7 +26,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 input:-webkit-autofill::first-line,
@@ -41,4 +40,26 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: theme('colors.violet');
   transition: background-color 5000s ease-in-out 0s;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: theme('colors.violet');
+  border-radius: 1rem;
+} 
+
+::-webkit-scrollbar-track-piece:end {
+  background: rgba(57, 57, 57, 0.3);
+  margin-bottom: 15rem;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: rgba(57, 57, 57, 0.3);
+  margin-top: 15rem;
+  border-radius: 1rem;
 }

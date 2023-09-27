@@ -2,6 +2,7 @@
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import { PostDescription } from '@/interfaces/post.interfaces';
 
@@ -13,7 +14,7 @@ const postSchema = z.object({
     .trim()
 });
 
-export default function PostFormUI({
+export default function CreatePostFormUI({
   onSubmit
 }: {
   onSubmit: (formData: PostDescription) => void;
@@ -26,19 +27,16 @@ export default function PostFormUI({
 
   return (
     <form
-      className='flex flex-col items-center h-full justify-between'
+      className='flex h-auto flex-col items-center'
       onSubmit={handleSubmit(onSubmit)}
     >
-      
-        <textarea
-          {...register('description', {
-            required: true
-          })}
-          placeholder='Say something...'
-          maxLength={200}
-          className='mx-0 mt-0 h-24 w-full resize-none bg-black px-4 py-2 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none sm:h-24'
-        />
-      
+      <TextareaAutosize
+        {...register('description', {
+          required: true  
+        })}
+        maxLength={200}
+        className='mx-0 mt-0 break-all w-full resize-none overflow-hidden bg-black px-4 py-2 text-lg text-violet caret-violet transition-colors placeholder:text-stone-700 hover:border-violet focus:border-violet focus:outline-none'
+      />
       {errors.description?.message && (
         <span className='mt-2 font-primary text-violet'>
           {errors.description?.message}
@@ -47,7 +45,7 @@ export default function PostFormUI({
       <button
         type='submit'
         disabled={isSubmitting}
-        className='h-14 w-36 border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none disabled:bg-slate-300 sm:h-16'
+        className='mb-3 block h-14 w-36 border-2 border-black bg-black text-center font-primary text-violet transition-colors hover:border-violet focus:outline-none disabled:bg-slate-300 sm:h-16'
       >
         SUBMIT
       </button>

@@ -49,9 +49,7 @@ export class GetPostsQueryHandler implements IQueryHandler {
       select: {
         description: true,
         handle: true,
-        id: true,
-        createdAt: true,
-        updatedAt: true
+        createdAt: true
       }
     });
 

@@ -3,15 +3,15 @@
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
-import PostFormUI from './ui';
+import CreatePostFormUI from './ui';
 import { PostDescription, PostParams } from '@/interfaces/post.interfaces';
 import postApi from '@/services/postApi';
 import { useGlobalStateStore } from '@/providers/GlobalState';
 
-export default function PostForm() {
+export default function CreatePostForm() {
   const state = useGlobalStateStore((state) => state);
 
-  const postMutation = useMutation({
+  const createPostMutation = useMutation({
     mutationFn: async (postData: PostParams) => {
       if (!state.user?.token) return console.error('Unauthorized user');
 
@@ -25,7 +25,7 @@ export default function PostForm() {
     }
   });
 
-  const postSubmit = (postDescription: PostDescription) => {
+  const onSubmit = (postDescription: PostDescription) => {
     if (!state.user?.handle || !state.user?.id) {
       return console.error('Unauthorized user');
     }
@@ -35,8 +35,8 @@ export default function PostForm() {
       handle: state.user.handle,
       userId: state.user.id
     };
-    postMutation.mutate(postData);
+    createPostMutation.mutate(postData);
   };
 
-  return <PostFormUI onSubmit={postSubmit} />;
+  return <CreatePostFormUI onSubmit={onSubmit} />;
 }

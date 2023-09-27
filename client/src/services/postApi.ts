@@ -1,18 +1,30 @@
-import api from "./api";
-import { PostParams } from "@/interfaces/post.interfaces";
+import api from './api';
+import { PostParams } from '@/interfaces/post.interfaces';
 
 async function create(params: PostParams, token: string) {
-  const result = await api.post('post', params, {
+  await api.post('post', params, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
+}
 
-  return result;
+async function get(token: string) {
+  const { data } = await api.get('post', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    params: {
+      take: 10
+    }
+  });
+
+  return data;
 }
 
 const postApi = {
-  create
+  create,
+  get
 };
 
 export default postApi;

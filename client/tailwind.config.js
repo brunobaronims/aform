@@ -19,7 +19,8 @@ module.exports = {
         black: '#000',
         white: '#FFF',
         violet: '#C9C4EC',
-        purple: '#150D1E'
+        purple: '#150D1E',
+        'dark-violet': '#C1A1E9'
       },
       fontFamily: {
         primary: ['"Kite One"', 'sans-serif'],

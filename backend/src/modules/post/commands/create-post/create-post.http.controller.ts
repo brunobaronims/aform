@@ -15,6 +15,7 @@ import BadRequestError from '@/libs/api/errors/bad-request.error';
 import InternalServerError from '@/libs/api/errors/internal-server.error';
 import { AuthGuard } from '@/libs/guards/auth.guard';
 import { AuthenticatedRequest } from '@/libs/interfaces/authenticated-request';
+import UnauthorizedError from '@/libs/api/errors/unauthorized.error';
 
 @ApiTags('post')
 @Controller()
@@ -37,6 +38,11 @@ export class CreatePostHttpController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Something went wrong!',
     type: InternalServerError
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Unauthorized user',
+    type: UnauthorizedError
   })
   async create(
     @Body() body: CreatePostRequestDto,
