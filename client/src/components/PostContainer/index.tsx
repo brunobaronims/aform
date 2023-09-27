@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import postApi from '@/services/postApi';
 import { PostParams } from '@/interfaces/post.interfaces';
 import PostContainerUI from './ui';
+import LoadingIndicator from '../LoadingIndicator';
 
 export default function PostContainer() {
   const state = useGlobalStateStore((state) => state);
@@ -33,7 +34,11 @@ export default function PostContainer() {
   }, [state.checkingUser, isLoading, data]);
 
   if (state.checkingUser || !state.user || isLoading)
-    return <section className='flex h-screen w-1/3 flex-col' />;
+    return (
+      <section className='flex h-screen w-1/3 flex-col items-center justify-center'>
+        <LoadingIndicator />
+      </section>
+    );
 
   if (isError) return <span>Error</span>;
 

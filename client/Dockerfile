@@ -10,7 +10,7 @@ COPY package*.json ./
 
 EXPOSE 3000
 
-RUN npm ci
+RUN npm i
 
 COPY . .
 

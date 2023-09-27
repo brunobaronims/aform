@@ -10,6 +10,7 @@ import RegisterForm from './RegisterForm';
 import { LoginParams, RegisterParams } from '@/interfaces/auth.interfaces';
 import authApi from '@/services/authApi';
 import { useGlobalStateStore } from '@/providers/GlobalState';
+import LoadingIndicator from '../LoadingIndicator';
 
 export default function AuthForm() {
   const [activeForm, setActiveForm] = useState('login');
@@ -62,19 +63,22 @@ export default function AuthForm() {
     });
   };
 
-  if (state.checkingUser || state.user) return (
-    <div className='relative w-[16rem] sm:w-96'>
-      <span className='absolute top-1/2 left-1/2 border-r-8 h-4 w-4 bg-black' />
-      <span className='absolute top-1/2 left-1/2 border-r-8 h-3 w-3 bg-red' />
-    </div>
-  );
+  if (state.checkingUser || state.user) return <LoadingIndicator />;
 
   return (
     <div className='w-[16rem] sm:w-96'>
       {activeForm === 'login' ? (
-        <LoginForm setActiveForm={setActiveForm} onSubmit={loginSubmit} />
+        <LoginForm
+          isLoading={loginMutation.isLoading}
+          setActiveForm={setActiveForm}
+          onSubmit={loginSubmit}
+        />
       ) : (
-        <RegisterForm setActiveForm={setActiveForm} onSubmit={registerSubmit} />
+        <RegisterForm
+          isLoading={registerMutation.isLoading}
+          setActiveForm={setActiveForm}
+          onSubmit={registerSubmit}
+        />
       )}
     </div>
   );

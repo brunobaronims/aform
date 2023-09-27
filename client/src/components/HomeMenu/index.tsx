@@ -10,6 +10,7 @@ import { GlobalState } from '@/providers/GlobalState';
 import { app } from '@/providers/Firebase';
 import { useGlobalStateStore } from '@/providers/GlobalState';
 import CreatePostModal from '../CreatePostModal/CreatePostModal';
+import LoadingIndicator from '../LoadingIndicator';
 
 async function firebaseSignOut(router: AppRouterInstance, state: GlobalState) {
   const auth = getAuth(app);
@@ -36,7 +37,11 @@ export default function HomeMenu() {
   });
 
   if (state.checkingUser || !state.user)
-    return <section className='flex h-screen w-1/3 flex-col' />;
+    return (
+      <section className='flex h-screen w-1/3 flex-col items-center justify-center'>
+        <LoadingIndicator />
+      </section>
+    );
 
   return (
     <>

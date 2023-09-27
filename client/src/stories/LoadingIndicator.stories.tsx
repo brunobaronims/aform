@@ -10,6 +10,4 @@ export default meta;
 
 type Story = StoryObj<typeof LoadingIndicator>;
 
-export const Primary: Story = {
-  
-}
+export const Primary: Story = {};

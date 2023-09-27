@@ -35,6 +35,7 @@ module.exports = {
         'slide-xslow': 'slide 54s linear infinite',
         'slide-xxslow': 'slide 57s linear infinite',
         fadein: 'fadein .3s ease-in-out',
+        'auth-form-fadein': 'fadein 2s forwards',
         fadeout: 'fadeout .3s ease-in-out'
       },
       keyframes: {
