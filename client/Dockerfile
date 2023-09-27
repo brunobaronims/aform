@@ -10,16 +10,13 @@ COPY package*.json ./
 
 EXPOSE 3000
 
-RUN npm i
+RUN npm ci
 
 COPY . .
 
 ENV NODE_ENV production
 
 RUN npm run build
-
-## Bugfix
-##COPY ./node_modules/next/dist/compiled/jest-worker ./.next/standalone/node_modules/next/dist/compiled/jest-worker
 
 FROM node:18-alpine as production
 
