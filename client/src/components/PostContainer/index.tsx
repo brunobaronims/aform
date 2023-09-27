@@ -32,11 +32,10 @@ export default function PostContainer() {
     setPosts(data);
   }, [state.checkingUser, isLoading, data]);
 
-  if (state.checkingUser || !state.user || isLoading) return null;
+  if (state.checkingUser || !state.user || isLoading)
+    return <section className='flex h-screen w-1/3 flex-col' />;
 
-  if (isError) return (<span>Error</span>)
+  if (isError) return <span>Error</span>;
 
-  return (
-    <PostContainerUI posts={posts} />
-  );
+  return <PostContainerUI posts={posts} />;
 }

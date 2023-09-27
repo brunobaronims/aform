@@ -15,6 +15,7 @@ async function firebaseSignOut(router: AppRouterInstance, state: GlobalState) {
   const auth = getAuth(app);
 
   try {
+    state.setCheckingUser(true);
     state.signOut();
     await signOut(auth);
     router.push('/');
@@ -34,9 +35,8 @@ export default function HomeMenu() {
     if (!state.user) router.push('/');
   });
 
-  if (state.checkingUser) return null;
-
-  if (!state.user) return null;
+  if (state.checkingUser || !state.user)
+    return <section className='flex h-screen w-1/3 flex-col' />;
 
   return (
     <>

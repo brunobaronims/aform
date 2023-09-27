@@ -62,9 +62,12 @@ export default function AuthForm() {
     });
   };
 
-  if (state.checkingUser) return null;
-
-  if (state.user) return null;
+  if (state.checkingUser || state.user) return (
+    <div className='relative w-[16rem] sm:w-96'>
+      <span className='absolute top-1/2 left-1/2 border-r-8 h-4 w-4 bg-black' />
+      <span className='absolute top-1/2 left-1/2 border-r-8 h-3 w-3 bg-red' />
+    </div>
+  );
 
   return (
     <div className='w-[16rem] sm:w-96'>
