@@ -6,3 +6,6 @@
 
 # Firebase private key
 .firebase
+
+# GitHub
+.github
