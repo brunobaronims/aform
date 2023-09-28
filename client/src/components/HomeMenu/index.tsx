@@ -29,6 +29,7 @@ export default function HomeMenu() {
   const router = useRouter();
   const state = useGlobalStateStore((state) => state);
   const [postModalOpen, setPostModalOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (state.checkingUser) return;
@@ -53,8 +54,8 @@ export default function HomeMenu() {
           />,
           document.body
         )}
-      <header className='flex h-14 w-full items-center justify-end sm:h-screen sm:w-1/3 sm:flex-col sm:justify-center px-5'>
-        <ul className='hidden sm:flex h-full flex-col items-center justify-center'>
+      <header className='fixed flex h-14 w-full items-center justify-end bg-black px-5 sm:static sm:h-screen sm:w-1/3 sm:flex-col sm:justify-center'>
+        <ul className='hidden h-full flex-col items-center justify-center sm:flex'>
           <li
             className='mb-8 w-fit font-secondary text-lg font-normal text-violet transition-colors hover:cursor-pointer hover:text-white'
             onClick={() => setPostModalOpen(true)}
@@ -69,10 +70,10 @@ export default function HomeMenu() {
           </li>
           <hr className='border-1 mb-8 w-36 border-violet'></hr>
         </ul>
-        <button className='sm:hidden flex flex-col h-6 justify-between'>
-          <hr className='w-6 bg-violet border-[1.5px]'/>
-          <hr className='w-6 bg-violet border-[1.5px]'/>
-          <hr className='w-6 bg-violet border-[1.5px] '/>
+        <button className='flex h-6 flex-col justify-between sm:hidden'>
+          <hr className='w-6 border-[1.5px] bg-violet' />
+          <hr className='w-6 border-[1.5px] bg-violet' />
+          <hr className='w-6 border-[1.5px] bg-violet ' />
         </button>
       </header>
     </>

@@ -4,9 +4,8 @@ import { PostParams } from '@/interfaces/post.interfaces';
 import UserImage from '../../../public/userimage.png';
 
 export default function PostContainerUI({ posts }: { posts: PostParams[] }) {
-
   return (
-    <section className='flex h-screen w-1/3 flex-col overflow-y-scroll'>
+    <section className='flex h-max w-full flex-col mt-14 sm:h-screen sm:w-1/3'>
       <ul className='flex w-full flex-col items-center pr-10 pt-10'>
         {posts.map((post, index) => {
           return (
@@ -19,12 +18,12 @@ export default function PostContainerUI({ posts }: { posts: PostParams[] }) {
                   src={UserImage}
                   alt="Post owner's profile image"
                   className='mb-4 h-16 w-16 rounded-[10rem] bg-transparent'
-                ></Image>
+                />
                 <span className='rounded-lg font-secondary text-violet'>
                   @{post.handle}
                 </span>
               </div>
-              <div className='px-3 py-4 font-secondary text-violet text-lg'>
+              <div className='px-3 py-4 font-secondary text-lg text-violet'>
                 {post.description}
               </div>
             </li>
