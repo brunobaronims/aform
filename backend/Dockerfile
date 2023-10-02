@@ -32,6 +32,21 @@ RUN npm ci --omit=dev
 
 USER node
 
+FROM node:lts-alpine as production
+
+EXPOSE 4000
+
+COPY --chown=node:node --from=build /app/node_modules ./node_modules
+COPY --chown=node:node --from=build /app/dist ./dist
+COPY --chown=node:node --from=build /app/package*.json ./
+COPY --chown=node:node --from=build /app/prisma ./prisma
+
+RUN npx prisma generate
+
+ENV HOST=127.0.0.1
+
+CMD ["npm", "run", "docker:prod"]
+
 FROM node:lts-alpine as local
 
 EXPOSE 4000
@@ -41,21 +56,6 @@ COPY --chown=node:node --from=build /app/dist ./dist
 COPY --chown=node:node --from=build /app/package*.json ./
 COPY --chown=node:node --from=build /app/prisma ./prisma
 COPY --chown=node:node --from=build /app/.firebase ./.firebase
-
-RUN npx prisma generate
-
-ENV HOST=127.0.0.1
-
-CMD ["npm", "run", "docker:prod"]
-
-FROM node:lts-alpine as production
-
-EXPOSE 4000
-
-COPY --chown=node:node --from=build /app/node_modules ./node_modules
-COPY --chown=node:node --from=build /app/dist ./dist
-COPY --chown=node:node --from=build /app/package*.json ./
-COPY --chown=node:node --from=build /app/prisma ./prisma
 
 RUN npx prisma generate
 
