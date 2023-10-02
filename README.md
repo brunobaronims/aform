@@ -63,7 +63,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 - [X] ~~Fix frontend Docker container~~
 - [ ] Update documentation for backend and frontend
 - [X] ~~Implement backend post flow~~
-- [ ] Implement frontend post flow
+- [X] ~~Implement frontend post flow~~
 - [ ] Add frontend test suite
 - [ ] Add backend test suite
 - [X] ~~Configure CD~~
