@@ -3,5 +3,5 @@ steps:
     args:
       - 'compose'
       - 'up'
-      - '-d'
+      - 'build'
     dir: './'

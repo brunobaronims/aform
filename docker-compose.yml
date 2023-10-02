@@ -4,7 +4,7 @@ services:
   postgres:
     restart: always
     image: postgres:latest
-    container_name: postgres
+    container_name: aform-postgres
     ports:
       - 5433:5432
     volumes:
@@ -20,7 +20,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
       target: ${API_BUILD_TARGET}
-    container_name: api
+    image: brunobaronims/aform:api
+    container_name: aform-api
     ports:
       - 4001:4000
     depends_on:
@@ -34,7 +35,8 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    container_name: client
+    image: brunobaronims/aform:client
+    container_name: aform-client
     ports:
       - 3001:3000
     depends_on:
@@ -45,7 +47,8 @@ services:
     build:
       context: ./client/nginx
       dockerfile: Dockerfile
-    container_name: nginx
+    image: brunobaronims/aform:nginx
+    container_name: aform-nginx
     ports:
       - 8080:80
     depends_on:

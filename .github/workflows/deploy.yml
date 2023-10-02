@@ -1,9 +1,11 @@
-name: Build and deploy
+name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - Google Cloud Build
+    types:
+      - completed
 
 jobs:
   build:

@@ -7,5 +7,5 @@
 # Firebase private key
 .firebase
 
-# GitHub
-.github
+# Kubernetes secrets
+**secrets.yaml
