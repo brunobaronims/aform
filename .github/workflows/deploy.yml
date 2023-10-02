@@ -1,10 +1,10 @@
 name: Deploy
 
 on:
-  check_run:
-    types:
-      - completed
-
+  push:
+    branches:
+      - master
+    
 jobs:
   build:
     runs-on: self-hosted
