@@ -18,23 +18,20 @@ steps:
   - 'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${_NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}'
   dir: './client'
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['-c', 'docker build -t $$USERNAME/aform:client .']
+  args: ['-c', 'docker build -t $$USERNAME/aform:client ./client']
   secretEnv: ['USERNAME']
-  dir: './client'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['-c', 'docker push $$USERNAME/aform:client']
   secretEnv: ['USERNAME']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['-c', 'docker build -t $$USERNAME/aform:api -f Dockerfile.prod .']
+  args: ['-c', 'docker build -t $$USERNAME/aform:api -f Dockerfile.prod ./backend']
   secretEnv: ['USERNAME']
-  dir: './backend'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['-c', 'docker push $$USERNAME/aform:api']
   secretEnv: ['USERNAME']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['-c', 'docker build -t $$USERNAME/aform:nginx .']
+  args: ['-c', 'docker build -t $$USERNAME/aform:nginx ./client/nginx']
   secretEnv: ['USERNAME']
-  dir: './client/nginx'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['-c', 'docker push $$USERNAME/aform:nginx']
   secretEnv: ['USERNAME']
