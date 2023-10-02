@@ -3,4 +3,6 @@ steps:
     args:
       - 'build'
       - '.'
+      - '--target'
+      - 'production'
     dir: './backend'
