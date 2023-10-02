@@ -68,6 +68,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 - [ ] Add frontend test suite
 - [ ] Add backend test suite
 - [X] ~~Configure CD~~
+- [X] ~~Add Cloud Build~~
 - [ ] Configure CI
 
 
