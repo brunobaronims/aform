@@ -2,9 +2,5 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
-      - '--build-arg'
-      - 'APP_ENV=production'
-      - '--backend'
-      - 'buildkit'
-      - '.'
+      - './Dockerfile.prod'
     dir: './backend'
