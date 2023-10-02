@@ -2,5 +2,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
-      - './Dockerfile.prod'
+      - '-f'
+      - 'Dockerfile.prod'
+      - '.'
     dir: './backend'
