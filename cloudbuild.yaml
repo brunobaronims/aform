@@ -4,5 +4,7 @@ steps:
       - 'build'
       - '--build-arg'
       - 'APP_ENV=production'
+      - '--backend'
+      - 'buildkit'
       - '.'
     dir: './backend'

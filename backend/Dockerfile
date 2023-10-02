@@ -1,8 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG APP_ENV=development 
-
-FROM node:lts-alpine as base
+FROM node:lts-alpine as development
 
 WORKDIR /app
 
@@ -20,7 +18,7 @@ WORKDIR /app
 
 COPY --chown=node:node package*.json ./
 
-COPY --chown=node:node --from=base /app/node_modules ./node_modules
+COPY --chown=node:node --from=development /app/node_modules ./node_modules
 
 COPY --chown=node:node . .
 
@@ -34,7 +32,7 @@ RUN npm ci --omit=dev
 
 USER node
 
-FROM node:lts-alpine as development-postbuild
+FROM node:lts-alpine as local
 
 EXPOSE 4000
 
@@ -44,7 +42,13 @@ COPY --chown=node:node --from=build /app/package*.json ./
 COPY --chown=node:node --from=build /app/prisma ./prisma
 COPY --chown=node:node --from=build /app/.firebase ./.firebase
 
-FROM node:lts-alpine as production-postbuild
+RUN npx prisma generate
+
+ENV HOST=127.0.0.1
+
+CMD ["npm", "run", "docker:prod"]
+
+FROM node:lts-alpine as production
 
 EXPOSE 4000
 
@@ -52,8 +56,6 @@ COPY --chown=node:node --from=build /app/node_modules ./node_modules
 COPY --chown=node:node --from=build /app/dist ./dist
 COPY --chown=node:node --from=build /app/package*.json ./
 COPY --chown=node:node --from=build /app/prisma ./prisma
-
-FROM ${APP_ENV}-postbuild as final
 
 RUN npx prisma generate
 
