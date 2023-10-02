@@ -1,8 +1,52 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'build'
-      - '-f'
-      - 'Dockerfile.prod'
-      - '.'
-    dir: './backend'
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker login --username=$$USERNAME --password=$$PASSWORD']
+  secretEnv: ['USERNAME', 'PASSWORD']
+- name: node:latest
+  entrypoint: npm
+  args: ["run", "create-env"]
+  env: 
+  - 'NEXT_PUBLIC_DEV_API_URL=${_NEXT_PUBLIC_DEV_API_URL}'
+  - 'NEXT_PUBLIC_DEV_PROD_URL=${_NEXT_PUBLIC_DEV_PROD_URL}'
+  - 'NEXT_PUBLIC_FIREBASE_API_KEY=${_NEXT_PUBLIC_FIREBASE_API_KEY}'
+  - 'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${_NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}'
+  - 'NEXT_PUBLIC_FIREBASE_PROJECT_ID=${_NEXT_PUBLIC_FIREBASE_PROJECT_ID}'
+  - 'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${_NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}'
+  - 'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${_NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}'
+  - 'NEXT_PUBLIC_FIREBASE_APP_ID=${_NEXT_PUBLIC_FIREBASE_APP_ID}'
+  - 'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${_NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}'
+  dir: './client'
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker build -t $$USERNAME/aform:client .']
+  secretEnv: ['USERNAME']
+  dir: './client'
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker push $$USERNAME/aform:client']
+  secretEnv: ['USERNAME']
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker build -t $$USERNAME/aform:api -f Dockerfile.prod .']
+  secretEnv: ['USERNAME']
+  dir: './backend'
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker push $$USERNAME/aform:api']
+  secretEnv: ['USERNAME']
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker build -t $$USERNAME/aform:nginx .']
+  secretEnv: ['USERNAME']
+  dir: './client/nginx'
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker push $$USERNAME/aform:nginx']
+  secretEnv: ['USERNAME']
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_NUMBER/secrets/docker-password/versions/1
+    env: 'PASSWORD'
+  - versionName: projects/$PROJECT_NUMBER/secrets/docker-username/versions/1
+    env: 'USERNAME'

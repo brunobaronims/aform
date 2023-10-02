@@ -51,6 +51,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 
 ## Container
 - Configure environment variables in root and client `.env` files according to example
+- Change image names in docker-compose.yaml accordingly
 - `docker-compose up -d` from project root to build images and the container network
 
 # To-do
@@ -67,6 +68,7 @@ TypeScript proof of concept implementing Domain Driven Design[^1] and SOLID prin
 - [ ] Add frontend test suite
 - [ ] Add backend test suite
 - [X] ~~Configure CD~~
+- [X] ~~Add Cloud Build~~
 - [ ] Configure CI
 
 
