@@ -19,7 +19,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      target: ${API_BUILD_TARGET}
     image: brunobaronims/aform:api
     container_name: aform-api
     ports:
