@@ -5,7 +5,7 @@ import DriveMyCar from '../../../public/drivemycar.png';
 
 export default function Recommendations() {
   return (
-    <section className='flex h-screen w-1/3 flex-col items-center justify-center sm:p-6'>
+    <section className='hidden sm:flex h-screen w-1/3 flex-col items-center justify-center sm:p-6'>
       <div className='flex flex-col items-center sm:h-max sm:w-72'>
         <span className='mb-3 font-secondary text-lg text-dark-violet'>
           You should listen to Yves Tumor

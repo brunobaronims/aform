@@ -1,4 +1,8 @@
 import { initializeApp } from 'firebase/app';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { getAuth, signOut } from 'firebase/auth';
+
+import { GlobalState } from './GlobalState';
 //import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
@@ -15,3 +19,16 @@ export const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 
 //console.log(analytics);
+
+export async function firebaseSignOut(router: AppRouterInstance, state: GlobalState) {
+  const auth = getAuth(app);
+
+  try {
+    state.setCheckingUser(true);
+    state.signOut();
+    await signOut(auth);
+    router.push('/');
+  } catch (e) {
+    console.log(e);
+  }
+}
