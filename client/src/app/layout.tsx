@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={jost.className}>
+      <body className={jost.className + ' overflow-x-hidden'}>
         <ToastContainer
           position='bottom-right'
           autoClose={3000}

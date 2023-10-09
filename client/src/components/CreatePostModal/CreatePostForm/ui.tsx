@@ -26,7 +26,7 @@ export default function CreatePostFormUI({
 
   return (
     <form
-      className='flex h-auto flex-col items-center bg-black p-2 sm:h-56 sm:justify-between'
+      className='flex h-full flex-col items-center bg-black p-2 lg:h-56 justify-between'
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextareaAutosize
@@ -45,7 +45,7 @@ export default function CreatePostFormUI({
       <button
         type='submit'
         disabled={isSubmitting || isLoading}
-        className='mb-3 flex h-14 w-36 items-center justify-center border-[1.5px] border-violet bg-black text-center font-primary text-violet transition-colors hover:bg-violet/10 focus:outline-none disabled:hover:bg-black disabled:hover:cursor-wait sm:h-16'
+        className='mb-3 flex h-14 w-36 items-center justify-center border-[1.5px] border-violet bg-black text-center font-primary text-violet transition-colors hover:bg-violet/10 focus:outline-none disabled:hover:bg-black disabled:hover:cursor-wait lg:h-16'
       >
         {isLoading ? <LoadingIndicator /> : 'SUBMIT'}
       </button>

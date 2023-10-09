@@ -19,7 +19,7 @@ export default function HomeMenu() {
 
   if (state.checkingUser || !state.user)
     return (
-      <header className='hidden sm:flex h-screen w-1/3 flex-col items-center justify-center'>
+      <header className='hidden lg:flex h-screen w-1/3 flex-col items-center justify-center'>
         <LoadingIndicator />
       </header>
     );

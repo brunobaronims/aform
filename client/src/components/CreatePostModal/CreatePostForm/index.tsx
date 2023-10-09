@@ -19,6 +19,7 @@ export default function CreatePostForm() {
     },
     onSuccess() {
       toast.info('Success');
+      state.setPostModalOpen(false);
     },
     onError(e: Error) {
       toast.error(e.message);
