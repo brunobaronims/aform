@@ -1,18 +1,14 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { MouseEvent } from 'react';
+
 import CreatePostForm from './CreatePostForm';
-
 import { assertIsNode } from '@/guards/assertIsNode';
+import { useGlobalStateStore } from '@/providers/GlobalState';
 
-export default function CreatePostModal({
-  setPostModalOpen: setPostModalOpen,
-  postModalOpen: postModalOpen
-}: {
-  setPostModalOpen: Dispatch<SetStateAction<boolean>>;
-  postModalOpen: boolean;
-}) {
+export default function CreatePostModal() {
   const ref = useRef<HTMLDivElement>(null);
   const [postModalClosing, setPostModalClosing] = useState(false);
+  const {postModalOpen, setPostModalOpen} = useGlobalStateStore(state => state);
 
   function handleClickOutsideModal(e: MouseEvent) {
     assertIsNode(e.target);
@@ -34,9 +30,9 @@ export default function CreatePostModal({
 
   return (
     <div className={fadein + fadeout + 'relative'}>
-      <div className='fixed inset-0 bg-black/30' aria-hidden='true' />
+      <div className='fixed inset-0 z-50 bg-black/30' aria-hidden='true' />
       <div
-        className='fixed inset-0 flex w-screen items-center justify-center'
+        className='fixed inset-0 z-50 flex w-screen items-center justify-center'
         onClick={(e) => handleClickOutsideModal(e)}
       >
         <div

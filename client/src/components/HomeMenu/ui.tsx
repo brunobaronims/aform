@@ -7,7 +7,6 @@ import { firebaseSignOut } from '@/providers/Firebase';
 import CreatePostModal from '../CreatePostModal/CreatePostModal';
 
 export default function HomeMenuUI() {
-  const [postModalOpen, setPostModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const router = useRouter();
@@ -32,18 +31,11 @@ export default function HomeMenuUI() {
 
   return (
     <>
-      {postModalOpen &&
-        createPortal(
-          <CreatePostModal
-            postModalOpen={postModalOpen}
-            setPostModalOpen={() => setPostModalOpen(false)}
-          />,
-          document.body
-        )}
-      <header className='fixed z-20 flex h-14 w-full items-center justify-end border-b-[0.5px] border-violet bg-black sm:hidden'>
+      {state.postModalOpen && createPortal(<CreatePostModal />, document.body)}
+      <header className='fixed z-20 flex h-14 w-full items-center justify-end border-b-[0.5px] border-violet bg-black lg:hidden'>
         <button
           onClick={() => handleMenuButtonClick()}
-          className='mr-6 flex h-6 flex-col justify-between sm:hidden'
+          className='mr-6 flex h-6 flex-col justify-between lg:hidden'
         >
           <hr className='w-6 border-[1.5px] bg-violet' />
           <hr className='w-6 border-[1.5px] bg-violet' />
@@ -54,23 +46,23 @@ export default function HomeMenuUI() {
         className={
           fadein +
           fadeout +
-          'fixed right-0 z-10 mt-14 h-24 w-48 flex-col items-center justify-center border-[0.5px] border-violet bg-black sm:static sm:mt-0 sm:flex sm:h-screen sm:w-1/3 sm:border-0'
+          'fixed right-0 z-10 mt-14 h-24 w-48 flex-col items-center justify-center border-[0.5px] border-violet bg-black lg:static lg:mt-0 lg:flex lg:h-screen lg:w-1/3 lg:border-0'
         }
       >
-        <ul className='w-24 flex-col items-center justify-center sm:static sm:flex sm:h-full sm:w-full'>
+        <ul className='w-24 flex-col items-center justify-center lg:static lg:flex lg:h-full lg:w-full'>
           <li
-            className='mb-8 hidden w-fit font-secondary text-lg font-normal text-violet transition-colors hover:cursor-pointer hover:text-white sm:block'
-            onClick={() => setPostModalOpen(true)}
+            className='mb-8 hidden w-fit font-secondary text-lg font-normal text-violet transition-colors hover:cursor-pointer hover:text-white lg:block'
+            onClick={() => state.setPostModalOpen(true)}
           >
             NEW
           </li>
           <li
-            className='w-fit font-secondary text-lg font-normal text-violet transition-colors hover:cursor-pointer hover:text-white sm:mb-8'
+            className='w-fit font-secondary text-lg font-normal text-violet transition-colors hover:cursor-pointer hover:text-white lg:mb-8'
             onClick={() => firebaseSignOut(router, state)}
           >
             SIGN OUT
           </li>
-          <hr className='border-1 mb-8 hidden w-36 border-violet sm:block'></hr>
+          <hr className='border-1 mb-8 hidden w-36 border-violet lg:block'></hr>
         </ul>
       </section>
     </>

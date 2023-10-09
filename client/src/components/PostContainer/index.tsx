@@ -35,7 +35,7 @@ export default function PostContainer() {
 
   if (state.checkingUser || !state.user || isLoading)
     return (
-      <section className='flex h-screen w-full sm:w-1/3 flex-col items-center justify-center'>
+      <section className='flex h-screen w-full lg:w-1/3 flex-col items-center justify-center'>
         <LoadingIndicator />
       </section>
     );
