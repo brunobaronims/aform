@@ -4,8 +4,9 @@
 # SSH
 *.pem
 
-# Firebase private key
-.firebase
+# Firebase
+.firebase*
+firebase*
 
 # Kubernetes secrets
 **secrets.yaml
